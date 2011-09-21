@@ -76,7 +76,7 @@ class Proxy extends \MySQLndUhConnection
         $this->eventDispatcher->dispatch(QueryEvents::PRE_EXECUTION, $event);
 
         $starttime = microtime(true);
-        $return = parent::query($res, $query);
+        $return = parent::query($res, $event->getQuery());
         $time = microtime(true) - $starttime;
 
         $event->setTime($time);
