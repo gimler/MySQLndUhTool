@@ -1,0 +1,16 @@
+<phpunit colors="true" bootstrap="autoload.php">
+
+  <testsuites>
+    <testsuite name="MySQLndUhTool">
+      <directory>tests/src/MySQLndUhTool</directory>
+    </testsuite>
+  </testsuites>
+
+  <filter>
+    <whitelist>
+      <directory>src/MySQLndUhTool</directory>
+    </whitelist>
+  </filter>
+
+</phpunit>
+

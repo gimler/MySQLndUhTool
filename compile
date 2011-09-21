@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/autoload.php';
+
+$pharFile = 'mysqlnduhtool.phar';
+if (file_exists($pharFile))
+{
+    unlink($pharFile);
+}
+
+$phar = new \Phar($pharFile, 0, 'MySQLndUhTool');
+$phar->setSignatureAlgorithm(\Phar::SHA1);
+
+$phar->startBuffering();
+
+// CLI Component files
+$files = array(
+  'LICENSE',
+  'autoload.php',
+  'vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php',
+);
+$dirs = array(
+  'src/MySQLndUhTool',
+  'vendor/Symfony/Component/EventDispatcher',
+);
+
+$finder = new \Symfony\Component\Finder\Finder();
+$iterator = $finder->files()->name('*.php')->in($dirs);
+
+$files = array_merge($files, iterator_to_array($iterator));
+foreach ($files as $file)
+{
+  $path = str_replace(__DIR__.'/', '', $file);
+  $content = php_strip_whitespace($file);
+
+  $phar->addFromString($path, $content);
+}
+
+// Stubs
+$license = <<<LICENSE
+/*
+ * This file is part of the MySQLndUhTool utility.
+ *
+ * (c) Gordon Franke <info@nevalon.de>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+LICENSE;
+$stub = sprintf('<?php %s require_once %s; __HALT_COMPILER();', $license, "__DIR__.'/autoload.php'");
+$phar['_cli_stub.php'] = $stub;
+$phar['_web_stub.php'] = $stub;
+$phar->setDefaultStub('_cli_stub.php', '_web_stub.php');
+
+$phar->stopBuffering();
+
+unset($phar);
