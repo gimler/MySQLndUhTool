@@ -26,12 +26,25 @@ use MySQLndUhTool\Event\Query;
  */
 class Proxy extends \MySQLndUhConnection
 {
+    /**
+     * The event dispatcher instance
+     *
+     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
     private $eventDispatcher = null;
 
+    /**
+     * The executed queries
+     *
+     * @var array
+     */
     private $queries = array();
 
-    protected $eventClassName = '\Symfony\Component\EventDispatcher\Event';
-
+    /**
+     * Maximum time to execute a query use for QueryEvents::SLOW
+     *
+     * @var integer 
+     */
     protected $maxQueryExecutionTime = 1;
 
     public function __construct(\Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher) {
