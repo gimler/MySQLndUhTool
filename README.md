@@ -70,7 +70,7 @@ Add listener to the events
         $eventDispatcher->addListener(MySQLndUhTool\QueryEvents::FAIL, $callback[, $priority]);
 
 Automatically integration in every php process
------------------------------------------------
+----------------------------------------------
 
 There are two usefull php ini option with that you can prepend the bootstrap of MySQLndUhTool `auto_prepend_file` and append option `auto_append_file` for log/output build in informations or do other stuff.
 
