@@ -21,6 +21,12 @@ $phar->setSignatureAlgorithm(\Phar::SHA1);
 
 $phar->startBuffering();
 
+if (!file_exists('composer.phar')) {
+  shell_exec('wget http://getcomposer.org/composer.phar');
+}
+
+shell_exec('php composer.phar install');
+
 // CLI Component files
 $files = array(
   'LICENSE',
