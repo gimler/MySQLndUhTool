@@ -1,9 +1,3 @@
-[submodule "lib/vendor/symfony-event-dispatcher"]
-	path = lib/vendor/symfony-event-dispatcher
-	url = https://github.com/symfony/EventDispatcher.git
-[submodule "vendor/Symfony/Component/EventDispatcher"]
-	path = vendor/Symfony/Component/EventDispatcher
-	url = https://github.com/symfony/EventDispatcher
 [submodule "vendor/Symfony/Component/Finder"]
 	path = vendor/Symfony/Component/Finder
 	url = https://github.com/symfony/Finder

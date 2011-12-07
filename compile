@@ -1,7 +1,14 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/autoload.php';
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader->registerNamespaces(array(
+    'Symfony' => __DIR__.'/vendor',
+    'MySQLndUhTool'  => __DIR__.'/src',
+));
+$loader->register();
 
 $pharFile = 'mysqlnduhtool.phar';
 if (file_exists($pharFile))
@@ -17,12 +24,12 @@ $phar->startBuffering();
 // CLI Component files
 $files = array(
   'LICENSE',
-  'autoload.php',
-  'vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php',
+  'vendor/.composer/autoload.php',
+  'vendor/.composer/autoload_namespaces.php'
 );
 $dirs = array(
   'src/MySQLndUhTool',
-  'vendor/Symfony/Component/EventDispatcher',
+  'vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher',
 );
 
 $finder = new \Symfony\Component\Finder\Finder();
@@ -48,7 +55,7 @@ $license = <<<LICENSE
  * with this source code in the file LICENSE.
  */
 LICENSE;
-$stub = sprintf('<?php %s require_once %s; __HALT_COMPILER();', $license, "__DIR__.'/autoload.php'");
+$stub = sprintf('<?php %s require_once %s; __HALT_COMPILER();', $license, "__DIR__.'/vendor/.composer/autoload.php'");
 $phar['_cli_stub.php'] = $stub;
 $phar['_web_stub.php'] = $stub;
 $phar->setDefaultStub('_cli_stub.php', '_web_stub.php');
