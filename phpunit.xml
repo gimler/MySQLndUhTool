@@ -1,4 +1,4 @@
-<phpunit colors="true" bootstrap="autoload.php">
+<phpunit colors="true" bootstrap="vendor/.composer/autoload.php">
 
   <testsuites>
     <testsuite name="MySQLndUhTool">
