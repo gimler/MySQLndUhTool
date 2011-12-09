@@ -1,5 +1,6 @@
 {
     "name": "mysqlnduhtool/mysqlnduhtool",
+    "description": "Mysql analyze tool. Find, log, mock  and change your php database queries without touching your code.",
     "keywords": ["database", "db", "mysql", "mysqlnd", "debug"],
     "homepage": "http://github.com/gimler/MySQLndUhTool",
     "version": "1.0.0",
